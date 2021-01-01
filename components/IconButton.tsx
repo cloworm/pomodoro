@@ -6,7 +6,7 @@ interface Props {
 
 const IconButton: FunctionComponent<Props> = ({ children, onClick }) => {
   return (
-    <button onClick={onClick}>{children}</button>
+    <button className="focus:outline-none" onClick={onClick}>{children}</button>
   )
 }
 

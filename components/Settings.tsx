@@ -1,17 +1,25 @@
-import { FunctionComponent, useCallback, useState } from 'react'
+import { FunctionComponent, useCallback, useState, useContext } from 'react'
 import ColorOptions from './ColorOptions'
 import FontOptions from './FontOptions'
 import Select from './Select'
+
+import { ThemeContext } from '../pages/_app'
+import { ActionKind } from '../reducers/theme.reducer'
 
 interface PomodoroState {
   [key: string]: number
 }
 
 interface Props {
-  onClose: any
+  onClose: () => void
 }
 
 const Settings: FunctionComponent<Props> = ({ onClose }) => {
+  const { state, dispatch } = useContext(ThemeContext)
+  const { font, color } = state
+  const [newFont, setNewFont] = useState<string>(font)
+  const [newColor, setNewColor] = useState<string>(color)
+
   const [{
     pomodoro,
     shortBreak,
@@ -21,6 +29,7 @@ const Settings: FunctionComponent<Props> = ({ onClose }) => {
     shortBreak: 5,
     longBreak: 15,
   })
+
   const handleIncrease = useCallback((key: string) => {
     setPomodoroState((oldState) => {
       if (!(key in oldState)) return oldState
@@ -40,8 +49,25 @@ const Settings: FunctionComponent<Props> = ({ onClose }) => {
     })
   }, [])
 
+  const handleFontChange = useCallback((font: string) => {
+    setNewFont(font)
+  }, [])
+  const handleColorChange = useCallback((color: string) => {
+    setNewColor(color)
+  }, [])
+
+  const handleApply = useCallback(() => {
+    if (newFont !== font) {
+      dispatch({ type: ActionKind.SET_FONT, payload: newFont })
+    }
+    if (newColor !== color) {
+      dispatch({ type: ActionKind.SET_COLOR, payload: newColor })
+    }
+    onClose()
+  }, [color, dispatch, font, newColor, newFont, onClose])
+
   return (
-    <div className="bg-white rounded-3xl">
+    <div className="relative bg-white rounded-3xl">
       <div className="flex justify-between items-end px-10 py-8">
         <h2 className="text-theme_darkBlue2 text-4xl">Settings</h2>
         <a className="cursor-pointer" onClick={onClose}>
@@ -70,7 +96,7 @@ const Settings: FunctionComponent<Props> = ({ onClose }) => {
             </p>
           </div>
 
-          <FontOptions />
+          <FontOptions font={newFont} onChange={handleFontChange} />
         </div>
 
         <hr />
@@ -82,9 +108,16 @@ const Settings: FunctionComponent<Props> = ({ onClose }) => {
             </p>
           </div>
 
-          <ColorOptions />
+          <ColorOptions color={newColor} onChange={handleColorChange} />
         </div>
       </div>
+
+      <div className="absolute m-auto -bottom-2 left-0 right-0 text-center">
+        <a onClick={handleApply} className="cursor-pointer inline bg-theme_red text-xl text-white px-12 py-5 rounded-full">
+          Apply
+        </a>
+      </div>
+
     </div>
   )
 }

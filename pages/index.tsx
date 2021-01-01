@@ -1,14 +1,17 @@
-import { FunctionComponent, useCallback, useState } from 'react'
+import { FunctionComponent, useCallback, useState, useContext } from 'react'
 import Head from 'next/head'
+import Modal from 'react-modal'
+
 import Timer from '../components/Timer'
 import IconButton from '../components/IconButton'
 import ToggleButton from '../components/ToggleButton'
-import Modal from 'react-modal'
 import Settings from '../components/Settings'
+import { ThemeContext } from './_app'
 
 Modal.setAppElement('#main')
 
 const Home: FunctionComponent = () => {
+  const { state: { font } } = useContext(ThemeContext)
   const [modalIsOpen, setIsOpen] = useState(true)
 
   const closeModal = useCallback(() => {
@@ -20,7 +23,7 @@ const Home: FunctionComponent = () => {
   },[])
 
   return (
-    <div className="relative">
+    <div className={`font-${font} relative`}>
       <Head>
         <title>pomodoro</title>
         <link rel="icon" href="/favicon.ico" />
@@ -48,14 +51,7 @@ const Home: FunctionComponent = () => {
           className="absolute top-1/2 left-1/2 m-auto transform -translate-x-1/2 -translate-y-1/2 w-3/6 focus:outline-none z-20"
           overlayClassName="bg-transparent"
         >
-          <div className="relative">
-            <Settings onClose={closeModal} />
-            <div className="absolute m-auto -bottom-2 left-0 right-0 text-center">
-              <a onClick={closeModal} className="cursor-pointer inline bg-theme_red text-xl text-white px-12 py-5 rounded-full">
-                Apply
-              </a>
-            </div>
-          </div>
+          <Settings onClose={closeModal} />
         </Modal>
       </main>
 
