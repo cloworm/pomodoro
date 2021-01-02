@@ -1,10 +1,10 @@
-import { FunctionComponent, useCallback, useState, useContext } from 'react'
+import React, { FunctionComponent, useCallback, useState } from 'react'
 import ColorOptions from './ColorOptions'
 import FontOptions from './FontOptions'
 import Select from './Select'
 
-import { ThemeContext } from '../pages/_app'
-import { ActionKind } from '../reducers/theme.reducer'
+import useTheme from '../hooks/useTheme'
+import { Fonts, Colors } from '../state/theme'
 
 interface PomodoroState {
   [key: string]: number
@@ -15,10 +15,13 @@ interface Props {
 }
 
 const Settings: FunctionComponent<Props> = ({ onClose }) => {
-  const { state, dispatch } = useContext(ThemeContext)
-  const { font, color } = state
-  const [newFont, setNewFont] = useState<string>(font)
-  const [newColor, setNewColor] = useState<string>(color)
+  const {
+    font,
+    color,
+    setTheme
+  } = useTheme()
+  const [newFont, setNewFont] = useState<Fonts>(font)
+  const [newColor, setNewColor] = useState<Colors>(color)
 
   const [{
     pomodoro,
@@ -49,22 +52,17 @@ const Settings: FunctionComponent<Props> = ({ onClose }) => {
     })
   }, [])
 
-  const handleFontChange = useCallback((font: string) => {
+  const handleFontChange = useCallback((font: Fonts) => {
     setNewFont(font)
   }, [])
-  const handleColorChange = useCallback((color: string) => {
+  const handleColorChange = useCallback((color: Colors) => {
     setNewColor(color)
   }, [])
 
   const handleApply = useCallback(() => {
-    if (newFont !== font) {
-      dispatch({ type: ActionKind.SET_FONT, payload: newFont })
-    }
-    if (newColor !== color) {
-      dispatch({ type: ActionKind.SET_COLOR, payload: newColor })
-    }
+    setTheme({ color: newColor, font: newFont })
     onClose()
-  }, [color, dispatch, font, newColor, newFont, onClose])
+  }, [newColor, newFont, setTheme, onClose])
 
   return (
     <div className="relative bg-white rounded-3xl">
@@ -113,9 +111,9 @@ const Settings: FunctionComponent<Props> = ({ onClose }) => {
       </div>
 
       <div className="absolute m-auto -bottom-2 left-0 right-0 text-center">
-        <a onClick={handleApply} className="cursor-pointer inline bg-theme_red text-xl text-white px-12 py-5 rounded-full">
+        <button aria-label="apply" onClick={handleApply} className="cursor-pointer inline bg-theme_red text-xl text-white px-12 py-5 rounded-full">
           Apply
-        </a>
+        </button>
       </div>
 
     </div>

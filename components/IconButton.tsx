@@ -1,12 +1,13 @@
-import { FunctionComponent } from 'react'
+import React, { FunctionComponent } from 'react'
 
 interface Props {
   onClick: () => void
+  label: string
 }
 
-const IconButton: FunctionComponent<Props> = ({ children, onClick }) => {
+const IconButton: FunctionComponent<Props> = ({ children, onClick, label }) => {
   return (
-    <button className="focus:outline-none" onClick={onClick}>{children}</button>
+    <button aria-label={label} className="focus:outline-none" onClick={onClick}>{children}</button>
   )
 }
 
