@@ -13,11 +13,11 @@ const ToggleButton: FunctionComponent = () => {
   }, [setType])
 
   return (
-    <div className="rounded-full bg-theme_darkBlue2 flex flex-row p-1 mb-8 z-10">
+    <div className="rounded-full bg-theme_darkBlue2 flex flex-row p-1.5 mb-14 md:mb-28 lg:mb-14 z-10">
       <button
         aria-label="pomodoro"
         onClick={() => handleClick(TimerType.POMODORO)}
-        className={`${timerType === TimerType.POMODORO ? `text-theme_darkBlue2 bg-${color} rounded-full` : 'text-theme_lightPurpleGray opacity-40'} focus:outline-none cursor-pointer font-bold text-xs w-24 py-3`}
+        className={`${timerType === TimerType.POMODORO ? `text-theme_darkBlue2 bg-${color} rounded-full` : 'text-theme_lightPurpleGray opacity-40 hover:opacity-100'} transition-all focus:outline-none active:outline-none cursor-pointer font-bold text-xs md:text-sm w-105px md:w-30 py-4 md:py-3.5`}
         aria-pressed={timerType === TimerType.POMODORO}
       >
         pomodoro
@@ -25,7 +25,7 @@ const ToggleButton: FunctionComponent = () => {
       <button
         aria-label="short break"
         onClick={() => handleClick(TimerType.SHORT_BREAK)}
-        className={`${timerType === TimerType.SHORT_BREAK ? `text-theme_darkBlue2 bg-${color} rounded-full` : 'text-theme_lightPurpleGray opacity-40'} focus:outline-none cursor-pointer font-bold text-xs w-24 py-3`}
+        className={`${timerType === TimerType.SHORT_BREAK ? `text-theme_darkBlue2 bg-${color} rounded-full` : 'text-theme_lightPurpleGray opacity-40 hover:opacity-100'} transition-all focus:outline-none active:outline-none cursor-pointer font-bold text-xs md:text-sm w-105px md:w-30 py-4 md:py-3.5`}
         aria-pressed={timerType === TimerType.SHORT_BREAK}
       >
         short break
@@ -33,7 +33,7 @@ const ToggleButton: FunctionComponent = () => {
       <button
         aria-label="long break"
         onClick={() => handleClick(TimerType.LONG_BREAK)}
-        className={`${timerType === TimerType.LONG_BREAK ? `text-theme_darkBlue2 bg-${color} rounded-full` : 'text-theme_lightPurpleGray opacity-40'} focus:outline-none cursor-pointer font-bold text-xs w-24 py-3`}
+        className={`${timerType === TimerType.LONG_BREAK ? `text-theme_darkBlue2 bg-${color} rounded-full` : 'text-theme_lightPurpleGray opacity-40 hover:opacity-100'} transition-all focus:outline-none active:outline-none cursor-pointer font-bold text-xs md:text-sm w-105px md:w-30 py-4 md:py-3.5`}
         aria-pressed={timerType === TimerType.LONG_BREAK}
       >
         long break

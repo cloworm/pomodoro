@@ -38,6 +38,7 @@ const useTimer = (): UseTimer => {
   }, [dispatch])
 
   const setType = useCallback((type: TimerType) => {
+    setProgress(0)
     dispatch({ type: TimerAction.SET_TYPE, payload: type })
   }, [dispatch])
 
@@ -54,8 +55,8 @@ const useTimer = (): UseTimer => {
     if (isOn) {
       const interval = setInterval(() => {
         const secondsLeft = getSecondsLeft(new Date(), endTime)
-        setProgress(( timerDuration - secondsLeft ) / timerDuration)
         setPrettyTime(getPrettyTime(secondsLeft))
+        setProgress(( timerDuration - secondsLeft ) / timerDuration)
       }, 100)
       return () => clearInterval(interval)
     } else {

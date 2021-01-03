@@ -10,11 +10,11 @@ interface Props {
 const ColorOptions: FunctionComponent<Props> = ({ color, onChange }) => {
   return (
     <div>
-      <div className="flex flex-row space-x-4">
+      <div className="flex flex-row space-x-1.5">
         <button
           aria-label={Colors.THEME_RED}
           onClick={() => onChange(Colors.THEME_RED)}
-          className="bg-theme_red h-10 w-10 focus:outline-none cursor-pointer rounded-full flex items-center justify-center"
+          className="bg-theme_red h-10 w-10 cursor-pointer rounded-full flex items-center justify-center border-4 transition-all box-content border-white hover:option-outline active:outline-none focus:outline-none"
           aria-pressed={color === Colors.THEME_RED}
         >
           {
@@ -28,7 +28,7 @@ const ColorOptions: FunctionComponent<Props> = ({ color, onChange }) => {
         <button
           aria-label={Colors.THEME_GREEN}
           onClick={() => onChange(Colors.THEME_GREEN)}
-          className="bg-theme_green h-10 w-10 focus:outline-none cursor-pointer rounded-full flex items-center justify-center"
+          className="bg-theme_green h-10 w-10 cursor-pointer rounded-full flex items-center justify-center border-4 transition-all box-content border-white hover:option-outline active:outline-none focus:outline-none"
           aria-pressed={color === Colors.THEME_GREEN}
         >
           {
@@ -43,7 +43,7 @@ const ColorOptions: FunctionComponent<Props> = ({ color, onChange }) => {
         <button
           aria-label={Colors.THEME_PURPLE}
           onClick={() => onChange(Colors.THEME_PURPLE)}
-          className="bg-theme_purple h-10 w-10 focus:outline-none cursor-pointer rounded-full flex items-center justify-center"
+          className="bg-theme_purple h-10 w-10 cursor-pointer rounded-full flex items-center justify-center border-4 transition-all box-content border-white hover:option-outline active:outline-none focus:outline-none"
           aria-pressed={color === Colors.THEME_PURPLE}
         >
           {

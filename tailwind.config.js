@@ -26,16 +26,28 @@ module.exports = {
         theme_darkBlue2: '#161932',
         theme_gray: '#EFF1FA',
       },
+      fontSize: {
+        '80px': '80px'
+      },
       height: {
-        '90': '90%'
+        '90': '90%',
+        '300px': '300px',
+        '410px': '410px'
       },
       width: {
-        '90': '90%'
+        '30': '7.5rem',
+        '90': '90%',
+        '105px': '105px',
+        '300px': '300px',
+        '410px': '410px'
       }
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      borderWidth: ['hover'],
+      outline: ['hover', 'active']
+    },
   },
   plugins: [
     plugin(({ addUtilities }) => {
@@ -45,8 +57,11 @@ module.exports = {
         },
         '.stroke-round': {
           strokeLinecap: 'round'
+        },
+        '.option-outline': {
+          boxShadow: '0 0 0 1px #EFF1FA'
         }
-      }, [])
+      }, ['hover'])
     })
   ],
 }
