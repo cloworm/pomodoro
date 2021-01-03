@@ -1,30 +1,57 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Pomodoro App
 
-## Getting Started
+Next.js JAMstack hosted on Vercel.
 
-First, run the development server:
+Pomodoro app frontend challenge from [Frontend Mentor](https://www.frontendmentor.io/)
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## [Demo](https://cloworm-pomodoro.vercel.app/)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Screenshots
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Desktop
+<img src="https://user-images.githubusercontent.com/5566310/103488386-0068a780-4dda-11eb-8f45-aa23206a7ae2.png" width="500" alt="Desktop">
 
-## Learn More
+### Tablet
+<img src="https://user-images.githubusercontent.com/5566310/103488387-02326b00-4dda-11eb-9305-38be07faeba3.png" width="500" alt="Tablet">
 
-To learn more about Next.js, take a look at the following resources:
+### Mobile
+<img src="https://user-images.githubusercontent.com/5566310/103488395-14aca480-4dda-11eb-8f7d-42fbc534db2c.png" width="500" alt="Mobile">
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Features
+* Set a Pomodoro Timer and Short & Long Break Timers
+* Customize how long each timer runs for
+* See a circular progress bar that updates every second and represents how far through the timer a user is
+* Customize the appearance of the app with the ability to set preferences for colors and fonts
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Technology Used
 
-## Deploy on Vercel
+* React
+* [Next.js](https://nextjs.org/)
+* [tailwindcss](https://tailwindcss.com/)
+* Hosted on [Vercel](https://vercel.com/)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Development
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  1. Clone repo
+
+      ```
+      git clone https://github.com/cloworm/pomodoro
+      ```
+
+2. Install Dependencies
+
+      ```
+      npm i
+      ```
+
+3. Run the dev server
+
+      ```
+      npm run dev
+      ```
+
+4. Run tests
+
+      ```
+      npm run test
+      ```
