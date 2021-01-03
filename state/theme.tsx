@@ -1,4 +1,4 @@
-import React, { Dispatch, createContext, useReducer, FunctionComponent } from 'react'
+import React, { Dispatch, createContext, useReducer, FunctionComponent, useMemo } from 'react'
 
 export enum Fonts {
   SANS = 'sans',
@@ -59,7 +59,7 @@ export const ThemeProvider: FunctionComponent = ({ children }) => {
   const [state, dispatch] = useReducer(themeReducer, initialState)
 
   return (
-    <ThemeContext.Provider value={{ state, dispatch }}>
+    <ThemeContext.Provider value={useMemo(() => ({ state, dispatch }), [state, dispatch])}>
       {children}
     </ThemeContext.Provider>
   )

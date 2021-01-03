@@ -3,11 +3,14 @@ import { AppProps } from 'next/app'
 import 'tailwindcss/tailwind.css'
 
 import { ThemeProvider } from '../state/theme'
+import { TimerProvider } from '../state/timer'
 
 const MyApp: FunctionComponent<AppProps> = ({ Component, pageProps }) => {
   return (
     <ThemeProvider>
-      <Component {...pageProps} />
+      <TimerProvider>
+        <Component {...pageProps} />
+      </TimerProvider>
     </ThemeProvider>
   )
 }

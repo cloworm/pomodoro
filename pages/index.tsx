@@ -7,6 +7,7 @@ import IconButton from '../components/IconButton'
 import ToggleButton from '../components/ToggleButton'
 import Settings from '../components/Settings'
 import useTheme from '../hooks/useTheme'
+import useTimer from '../hooks/useTimer'
 
 const hideApp = process.env.NODE_ENV !== 'test'
 
@@ -16,6 +17,7 @@ if (hideApp) {
 
 const Home: FunctionComponent = () => {
   const { font } = useTheme()
+  const { timerType, timerDuration } = useTimer()
   const [modalIsOpen, setIsOpen] = useState(false)
 
   const closeModal = useCallback(() => {
@@ -40,7 +42,7 @@ const Home: FunctionComponent = () => {
 
         <ToggleButton />
 
-        <Timer />
+        <Timer key={`${timerType}-${timerDuration}`} />
 
         <div className="pt-14">
           <IconButton label="settings" onClick={() => openModal()}>

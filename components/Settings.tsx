@@ -4,11 +4,9 @@ import FontOptions from './FontOptions'
 import Select from './Select'
 
 import useTheme from '../hooks/useTheme'
+import useTimer from '../hooks/useTimer'
 import { Fonts, Colors } from '../state/theme'
-
-interface PomodoroState {
-  [key: string]: number
-}
+import { Defaults, TimerType } from '../state/timer'
 
 interface Props {
   onClose: () => void
@@ -22,32 +20,22 @@ const Settings: FunctionComponent<Props> = ({ onClose }) => {
   } = useTheme()
   const [newFont, setNewFont] = useState<Fonts>(font)
   const [newColor, setNewColor] = useState<Colors>(color)
+  const { defaults, setDefaults } = useTimer()
+  const [newDefaults, setNewDefaults] = useState<Defaults>(defaults)
 
-  const [{
-    pomodoro,
-    shortBreak,
-    longBreak
-  }, setPomodoroState] = useState<PomodoroState>({
-    pomodoro: 25,
-    shortBreak: 5,
-    longBreak: 15,
-  })
-
-  const handleIncrease = useCallback((key: string) => {
-    setPomodoroState((oldState) => {
-      if (!(key in oldState)) return oldState
+  const handleIncrease = useCallback((key: TimerType) => {
+    setNewDefaults((oldDefaults) => {
       return {
-        ...oldState,
-        [key]: oldState[key] += 5
+        ...oldDefaults,
+        [key]: oldDefaults[key] + 5 * 60
       }
     })
   }, [])
-  const handleDecrease = useCallback((key: string) => {
-    setPomodoroState((oldState) => {
-      if (!(key in oldState)) return oldState
+  const handleDecrease = useCallback((key: TimerType) => {
+    setNewDefaults((oldDefaults) => {
       return {
-        ...oldState,
-        [key]: oldState[key] -= 5
+        ...oldDefaults,
+        [key]: Math.max(5 * 60, oldDefaults[key] - 5 * 60)
       }
     })
   }, [])
@@ -61,8 +49,9 @@ const Settings: FunctionComponent<Props> = ({ onClose }) => {
 
   const handleApply = useCallback(() => {
     setTheme({ color: newColor, font: newFont })
+    setDefaults(newDefaults)
     onClose()
-  }, [newColor, newFont, setTheme, onClose])
+  }, [newColor, newFont, setTheme, onClose, newDefaults, setDefaults])
 
   return (
     <div className="relative bg-white rounded-3xl">
@@ -80,9 +69,9 @@ const Settings: FunctionComponent<Props> = ({ onClose }) => {
           TIME (MINUTES)
         </p>
         <div className="flex space-x-6 pb-8">
-          <Select onIncrease={handleIncrease} onDecrease={handleDecrease} label="pomodoro" selected={pomodoro} />
-          <Select onIncrease={handleIncrease} onDecrease={handleDecrease} label="short break" selected={shortBreak} />
-          <Select onIncrease={handleIncrease} onDecrease={handleDecrease} label="long break" selected={longBreak} />
+          <Select onIncrease={handleIncrease} onDecrease={handleDecrease} label={TimerType.POMODORO} selected={newDefaults[TimerType.POMODORO]} />
+          <Select onIncrease={handleIncrease} onDecrease={handleDecrease} label={TimerType.SHORT_BREAK} selected={newDefaults[TimerType.SHORT_BREAK]} />
+          <Select onIncrease={handleIncrease} onDecrease={handleDecrease} label={TimerType.LONG_BREAK} selected={newDefaults[TimerType.LONG_BREAK]} />
         </div>
 
         <hr />
