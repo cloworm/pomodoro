@@ -39,7 +39,7 @@ const Home: FunctionComponent = () => {
       </Head>
 
       <main id="main" className="min-h-screen flex flex-col items-center text-center bg-theme_darkBlue2">
-        <img className="pt-10 md:pt-20 lg:pt-10 pb-10 md:pb-16" src="/images/logo.svg" />
+        <img className="pt-10 md:pt-20 lg:pt-10 pb-10 md:pb-16" src="/images/logo.svg" alt="Logo" />
 
         <ToggleButton />
 
